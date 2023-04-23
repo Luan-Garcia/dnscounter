@@ -105,6 +105,52 @@ int main(int argc, char *argv[]){
                 } else {
                         printf("Não realizar consulta whois");
                 }
+                
+                int resposta3;
+                printf("Você deseja realizar uma pesquisa dns? (Digite 1 para sim e 2 para não) \n");
+                scanf("%i",&resposta3);
+
+                if (resposta3 == 1) {
+                        char commandSOA[512];
+                        char commandA[512];
+                        char commandAAAA[512];
+                        char commandns[512];
+                        char commandcname[512];
+                        char commandmx[512];
+                        char commandptr[512];
+                        char commandinfo[512];
+                        char commandtxt[512];
+
+                        printf("Registro de ínicio: \n");
+                        sprintf(commandSOA, "host -t SOA %s", argv[1]);
+                        system(commandSOA);
+                        printf("Registro IPV4: \n");
+                        sprintf(commandA, "host -t A %s", argv[1]);
+                        system(commandA);
+                        printf("Registro IPV6: \n");
+                        sprintf(commandAAAA, "host -t AAAA %s", argv[1]);
+                        system(commandAAAA);
+                        printf("Registro nameserver: \n");
+                        sprintf(commandns, "host -t ns %s", argv[1]);
+                        system(commandns);
+                        printf("Registro cname: \n");
+                        sprintf(commandcname, "host -t cname %s", argv[1]);
+                        system(commandcname);
+                        printf("Registro MX: \n");
+                        sprintf(commandmx, "host -t mx %s", argv[1]);
+                        system(commandmx);
+                        printf("Registro ptr: \n");
+                        sprintf(commandptr, "host -t ptr %s", argv[1]);
+                        system(commandptr);
+                        printf("Registro hinfo: \n");
+                        sprintf(commandinfo, "host -t hinfo %s", argv[1]);
+                        system(commandinfo);
+                        printf("Registro TXT: \n");
+                        sprintf(commandtxt, "host -t txt %s", argv[1]);
+                        system(commandtxt);
+                } else {
+                        printf("Não realizar pesquisa dns. \n");
+                }
 
         }
 
