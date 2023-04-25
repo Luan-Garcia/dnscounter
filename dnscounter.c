@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
 
 
                 if (alvo == NULL) {
-                        printf("Ocorreu um erro");
+                        printf("Ocorreu um erro \n");
                 } else {
                     printf("o ip do site é: %s\n",inet_ntoa(*((struct in_addr *)alvo->h_addr)));
                 }
@@ -155,6 +155,27 @@ int main(int argc, char *argv[]){
                 int resposta4;
                 printf("Você deseja realizar uma listagem de todos os hosts? (Digite 1 para sim e 2 para não) \n");
                 scanf("%i",&resposta4);
+                
+                if (resposta4 == 1) {
+                    char command1[100];
+                    char servidorns[100];
+                    int result;
+
+                    printf("Insira o nameserver do serviço que você deseja listar os hosts:\n");
+                    scanf("%99s", servidorns);
+
+                    do {
+                        sprintf(command1, "host -l %s %s", argv[1], servidorns);
+                        result = system(command1);
+
+                        if (result == 0) {
+                                          printf("A listagem de hosts falhou. O servidor DNS não permite transferências de zona.\n");
+                                          printf("Tentando novamente...\n");
+                        }
+                    } while (result == 5);
+                  } else {
+                          printf("Não realizar uma listagem de hosts.\n");
+                  }
 
                 if (resposta4 == 1) {
                         char command1[100];
