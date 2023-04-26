@@ -163,54 +163,10 @@ int main(int argc, char *argv[]){
                         scanf("%i",&resposta4);
 
                         if (resposta4 == 1) {
-                            char command1[100];
-                            char servidorns[100];
-                            int result;
-
-                            printf("Insira o nameserver do serviço que você deseja listar os hosts:\n");
-                            scanf("%99s", servidorns);
-
-                            do {
-                                sprintf(command1, "host -l %s %s", argv[1], servidorns);
-                                result = system(command1);
-
-                                if (result == 0) {
-                                        printf("A listagem de hosts falhou. O servidor DNS não permite transferências de zona.\n");
-                                        printf("Tentando novamente...\n");
-                                }
-                            } while (result == 5);
-                        } else {
-                                printf("Não realizar uma listagem de hosts.\n");
-                        }
-
-                        if (resposta4 == 1) {
-                                char command1[100];
-                                char servidorns[100];
-                                int resposta5;
-
-                                printf("Você deseja realizar uma segunda listagem de hosts? (Digite 1 para sim e 2 para não) \n");
-                                scanf("%i",&resposta5);
-                                if (resposta5 == 1) {
-                                        printf("Insira o nameserver do serviço que você deseja listar os host(use apenas caso a primeira listagem não funcione): \n");
-                                        scanf("%99s", servidorns);
-                                        sprintf(command1, "host -l %s %s", argv[1], servidorns);
-                                        int result = system(command1);
-                                        printf("\n");
-                                        if (result == 5) {
-                                                char command2[100];
-                                                char servidorns2[100];
-                                                printf("A listagem de hosts falhou. O servidor DNS não permite transferências de zona.\n");
-                                                printf("Insira o segundo nameserver:\n");
-                                                scanf("%99s", servidorns2);
-                                                sprintf(command2, "host -l %s %s", argv[1], servidorns2);
-                                                system(command2);
-                                                printf("\n");
-                                        } else {
-                                                printf("Segunda listagem se host concluida! \n");
-                                        }
-                                } else {
-                                        printf("Não realizar uma segunda listagem de hosts \n");
-                                }
+                                char command4[100];
+                                sprintf(command4, "for server in $(host -t ns %s |cut -d ' ' -f4);do host -l -a %s $server;done ",argv[1],argv[1]);
+                                system(command4);
+                                return 1;
 
                         } else {
                                 printf("Não realizar uma listagem de hosts.\n");
@@ -220,3 +176,4 @@ int main(int argc, char *argv[]){
 
         return 0;
 }
+                        
