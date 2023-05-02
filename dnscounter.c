@@ -166,14 +166,26 @@ int main(int argc, char *argv[]){
                                 char command4[100];
                                 sprintf(command4, "for server in $(host -t ns %s |cut -d ' ' -f4);do host -l -a %s $server;done ",argv[1],argv[1]);
                                 system(command4);
-                                return 1;
-
+                                printf("\n");
                         } else {
                                 printf("Não realizar uma listagem de hosts.\n");
+                        }
+
+                        int resposta5;
+                        printf("Você deseja realizar um brute force dns? (Digite 1 para sim e 2 para não) \n");
+                        printf("É provável que apareção resultados já mostrados antes na listagem de hosts \n");
+                        scanf("%i",&resposta5);
+
+                        if (resposta5 ==1) {
+                                char command5[100];
+                                sprintf(command5, "for palavra in $(cat lista.txt); do if host $palavra.%s | grep -q 'has address'; then echo $palavra.%s é um domínio válido; f>
+                                system(command5);
+                                printf("\n");
+                        } else {
+                                printf("Não realizar brute force dns");
                         }
                 }
         }
 
         return 0;
-}
-                        
+}              
