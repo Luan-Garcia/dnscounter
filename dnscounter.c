@@ -184,6 +184,47 @@ int main(int argc, char *argv[]){
                         } else {
                                 printf("Não realizar brute force dns");
                         }
+                        
+                        //ainda em teste
+                                        
+                        int resposta6;
+                        printf("Você deseja realizar uma consulta reversa? (Digite 1 para sim e 2 para não) \n");
+                        scanf("%i",&resposta6);
+
+                        if (resposta6 == 1) {
+                                char command6[100];
+                                char command7[100];
+                                char command8[100];
+                                char output[1024];
+                                char ip2[1024];
+                                int a, b, c, d, e, f, g, h;
+                                sprintf(command8, "host -t A %s | awk '{print $NF}'", argv[1]);
+                                sprintf(ip2, "%s", command8);
+                                sprintf(command6, "whois -B %s | grep -i 'netrange\\|inetnum' | cut -d ':' -f 2 | sed 's/^[[:space:]]*\\///'", ip2);
+                                FILE *fp = popen(command6, "r");
+                                fgets(output, sizeof(output), fp);
+                                pclose(fp);
+                                sscanf(output, "%d.%d.%d.%d - %d.%d.%d.%d", &a, &b, &c, &d, &e, &f, &g, &h);
+                                sprintf(command6, "whois -B %s | grep -i 'netrange\\|inetnum' | cut -d ':' -f 2 | sed 's/^[[:space:]]*\\///'", ip2);
+                                fp = popen(command6, "r");
+                                fgets(output, sizeof(output), fp);
+                                pclose(fp);
+                                printf("d = %d, h = %d\n", d, h);
+                                if (d <= h) {
+                                    sprintf(command7, "for ip in $(seq %d %d); do host -t ptr %s.$ip; done", d, h, ip2);
+                                    system(command7);
+                                } else {
+                                    printf("Erro: o valor de d é maior que h");
+                                }
+                        } else {
+                                printf("não funfou");
+                        }
+                }
+
+        }
+
+        return 0;
+}
                 }
         }
 
