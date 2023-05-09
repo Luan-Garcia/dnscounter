@@ -184,8 +184,6 @@ int main(int argc, char *argv[]){
                         } else {
                                 printf("Não realizar brute force dns");
                         }
-                        
-                        //ainda em teste
                                         
                         int resposta6;
                         printf("Você deseja realizar uma consulta reversa? (Digite 1 para sim e 2 para não) \n");
@@ -193,40 +191,51 @@ int main(int argc, char *argv[]){
 
                         if (resposta6 == 1) {
                                 char command6[100];
-                                char command7[100];
                                 char command8[100];
+                                char command9[100];
+                                char resultado[100];
+                                char ip_address[16];
                                 char output[1024];
-                                char ip2[1024];
                                 int a, b, c, d, e, f, g, h;
+                                char ip[16];
+                                char ip3[16];
+
                                 sprintf(command8, "host -t A %s | awk '{print $NF}'", argv[1]);
-                                sprintf(ip2, "%s", command8);
-                                sprintf(command6, "whois -B %s | grep -i 'netrange\\|inetnum' | cut -d ':' -f 2 | sed 's/^[[:space:]]*\\///'", ip2);
-                                FILE *fp = popen(command6, "r");
-                                fgets(output, sizeof(output), fp);
+                                FILE *fp = popen(command8, "r");
+                                fgets(ip_address, sizeof(ip_address), fp);
                                 pclose(fp);
-                                sscanf(output, "%d.%d.%d.%d - %d.%d.%d.%d", &a, &b, &c, &d, &e, &f, &g, &h);
-                                sprintf(command6, "whois -B %s | grep -i 'netrange\\|inetnum' | cut -d ':' -f 2 | sed 's/^[[:space:]]*\\///'", ip2);
-                                fp = popen(command6, "r");
-                                fgets(output, sizeof(output), fp);
-                                pclose(fp);
-                                printf("d = %d, h = %d\n", d, h);
-                                if (d <= h) {
-                                    sprintf(command7, "for ip in $(seq %d %d); do host -t ptr %s.$ip; done", d, h, ip2);
-                                    system(command7);
-                                } else {
-                                    printf("Erro: o valor de d é maior que h");
+
+                                sprintf(command8, "whois -B %s", ip_address);
+                                fp = popen(command8, "r");
+                                while (fgets(output, sizeof(output), fp) != NULL) {
+                                    printf("%s", output);
                                 }
+                                pclose(fp);
+
+                                printf("Digite o primeiro endereço ip após o inetnum/netrange: ");
+                                scanf("%s", ip);
+
+                                sscanf(ip, "%d.%d.%d.%d", &a, &b, &c, &d);
+
+                                printf("Digite o segundo endereço ip após o inetnum/netrange: ");
+                                scanf("%s", ip3);
+
+                                sscanf(ip3, "%d.%d.%d.%d", &e, &f, &g, &h);
+
+                                sprintf(resultado, "%d.%d.%d", a, b, c);
+
+                                printf("Realizando a consulta reversa... \n");
+
+                                sprintf(command9, "for ip in $(seq %i %i); do host -t ptr %s.$ip; done", d, h, resultado);
+                                system(command9);
+
                         } else {
                                 printf("não funfou");
                         }
+
                 }
 
         }
 
         return 0;
 }
-                }
-        }
-
-        return 0;
-}              
