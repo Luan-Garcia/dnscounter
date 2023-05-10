@@ -2,8 +2,8 @@ O dnscounter é uma poderosa ferramenta de mapeamento de infraestrutura que ofer
 
 Entre as funcionalidades disponíveis para sites estão: 
 
-[✔️]Consulta whois 
-[✔️]Listagem de hosts 
-[✔️]Brute force dns
-[✔️]Uma consulta reversa 
-[✔️]Análise de mail spoofing
+[✔️]Consulta whois  
+[✔️]Listagem de hosts   
+[✔️]Brute force dns  
+[✔️]Uma consulta reversa   
+[✔️]Análise de mail spoofing  
