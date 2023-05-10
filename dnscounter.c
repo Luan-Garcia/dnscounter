@@ -228,9 +228,22 @@ int main(int argc, char *argv[]){
 
                                 sprintf(command9, "for ip in $(seq %i %i); do host -t ptr %s.$ip; done", d, h, resultado);
                                 system(command9);
+                                printf("\n");
 
                         } else {
-                                printf("não funfou");
+                                printf("Não realizar consulta reversa. \n");
+                        }
+                                        
+                        int resposta7;
+                        printf("Você deseja ver se o alvo é vulnerável a mail spoofing? (Digite 1 para sim e 2 para não) \n");
+                        scanf("%i", &resposta7);
+                                        
+                        if (resposta7 == 1) {
+                                char command10[100];
+                                sprintf(command10, "host -t txt %s", argv[1]);
+                                system(command10);
+                        } else { 
+                                printf("Não verificar vulnerabilidade. \n");
                         }
 
                 }
