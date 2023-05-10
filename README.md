@@ -7,3 +7,7 @@ Entre as funcionalidades disponíveis para sites estão:
 [✔️]Brute force dns  
 [✔️]Uma consulta reversa   
 [✔️]Análise de mail spoofing  
+
+
+![image](https://github.com/Luan-Garcia/dnscounter/assets/129139019/89a43dcb-a129-47c2-86c7-988366c15f05)
+
