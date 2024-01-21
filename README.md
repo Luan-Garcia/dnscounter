@@ -9,5 +9,6 @@ Entre as funcionalidades disponíveis para sites estão:
 [✔️]Análise de mail spoofing  
 
 
-![image](https://github.com/Luan-Garcia/dnscounter/assets/129139019/89a43dcb-a129-47c2-86c7-988366c15f05)
+![image](https://github.com/Luan-Garcia/dnscounter/assets/129139019/bfd4b5eb-d6bf-49b9-940b-a66425f7ef7e)
+
 
